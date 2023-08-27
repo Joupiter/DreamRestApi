@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'fr.joupi'
+version '1.0-SNAPSHOT'
+compileJava.options.encoding = 'UTF-8'
+
+java {
+    sourceCompatibility = 11
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.dreamnetwork.cloud/repository/maven-releases/' }
+}
+
+dependencies {
+    implementation 'io.javalin:javalin:5.6.1'
+    implementation 'be.alexandre01.dreamnetwork:DreamNetwork-Core:1.11'
+    implementation 'org.reflections:reflections:0.10.2'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+}
+
+shadowJar {
+    dependencies {
+        exclude(dependency('org.projectlombok:lombok:1.18.24'))
+        exclude(dependency('be.alexandre01.dreamnetwork:DreamNetwork-Core:1.11'))
+    }
+}
